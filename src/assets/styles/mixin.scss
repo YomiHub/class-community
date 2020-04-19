@@ -1,0 +1,15 @@
+@mixin clearfix{
+  *zoom: 1;
+  &:after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin flexSet($justify, $align,$direction:row){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
