@@ -1,0 +1,35 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './element-ui.scss';
+
+body {
+  color: #2c3e50;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+ul,li{
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+.content-box{
+  width:$contentWidth;
+  margin:0 auto;
+}
+
+.container{
+  min-width:$contentWidth;
+}
+
+// 设置svg父元素的字体大小，svg icon 宽高为1em
+.icon-base{
+  font-size:24px;
+}
+
