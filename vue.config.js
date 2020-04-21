@@ -25,7 +25,7 @@ module.exports = {
         target: process.env.VUE_APP_BASE_API_URL, // (没有匹配到静态文件的请求) 代理到http://localhost:3000（真实后台路径）
         changeOrigin: true, // 为false则request host 为localhost；设置为true,target是host
         pathRewrite: {
-          '^/api': '' // 真实后台接口不需要带 /api
+          '^/api': '/api' // 真实后台接口需要带 /api
         }
       }
     }
@@ -96,7 +96,7 @@ module.exports = {
                 name: 'chunk-libs',
                 test: /[\\/]node_modules[\\/]/,
                 priority: 10,
-                chunks: 'initial' // only package third parties that are initially dependent
+                chunks: 'initial' // only package third parties that are initially dependent 只打包初始时依赖的第三方
               },
               elementUI: {
                 name: 'chunk-elementUI', // split elementUI into a single package
@@ -106,7 +106,7 @@ module.exports = {
               commons: {
                 name: 'chunk-commons',
                 test: resolve('src/components'), // can customize your rules
-                minChunks: 3, //  minimum common number
+                minChunks: 2, //  minimum common number
                 priority: 5,
                 reuseExistingChunk: true
               }

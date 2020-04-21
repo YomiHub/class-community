@@ -4,7 +4,7 @@ import Cookies from 'js-cookie' // https://www.npmjs.com/package/js-cookie
 const TokenKey = 'user_token'
 const UserNameKey = 'user_name'
 const UserIdKey = 'user_id'
-const AvaterUrlKey = 'avater_url'
+const AvatarUrlKey = 'avatar_url'
 
 // 获取设置token
 export function getToken () {
@@ -28,15 +28,21 @@ export function getUserId () {
   return Cookies.get(UserIdKey)
 }
 
-export function getUserAvater () {
-  return Cookies.get(AvaterUrlKey)
+export function getUserAvatar () {
+  return Cookies.get(AvatarUrlKey)
 }
 
-export function setUser (userName = '', userId = '', userAvater = '') {
+export function setAvatar (userAvatar = '') {
+  return (
+    Cookies.set(AvatarUrlKey, userAvatar)
+  )
+}
+
+export function setUser (userName = '', userId = '', userAvatar = '') {
   return (
     Cookies.set(UserNameKey, userName) &&
     Cookies.set(UserIdKey, userId) &&
-    Cookies.set(AvaterUrlKey, userAvater)
+    Cookies.set(AvatarUrlKey, userAvatar)
   )
 }
 
@@ -44,7 +50,7 @@ export function removeUser () {
   return (
     Cookies.remove(UserNameKey) &&
     Cookies.remove(UserIdKey) &&
-    Cookies.remove(AvaterUrlKey)
+    Cookies.remove(AvatarUrlKey)
   )
 }
 

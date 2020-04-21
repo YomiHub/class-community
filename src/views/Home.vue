@@ -1,13 +1,20 @@
 <template>
   <div class="home">
-    这是Home page
+    <base-header></base-header>
+    <router-view></router-view>
+    <base-footer></base-footer>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 export default {
   name: 'Home',
-  components: {}
+  components: {
+    'base-header': Header,
+    'base-footer': Footer
+  }
 }
 </script>
