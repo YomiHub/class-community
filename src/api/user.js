@@ -17,6 +17,7 @@ request params
 data:{
   phone_num:
   user_pass:
+  user_name:
 }
 */
 export function register (data) {
@@ -30,6 +31,12 @@ export function register (data) {
   })
 }
 
+/*
+data:{
+  phone_num:
+  user_pass:
+}
+*/
 export function login (data) {
   var changeData = JSON.parse(JSON.stringify(data))
   changeData.user_pass = AES.encrypt(data.user_pass, secret).toString()
@@ -39,4 +46,24 @@ export function login (data) {
     data: changeData,
     loading: true
   })
+}
+
+/*
+data:{
+  formData
+}
+*/
+export function avatarUpload (uploadData) {
+  return request({
+    url: '/avater/upload',
+    method: 'post',
+    data: uploadData,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    dataType: 'file'
+  })
+}
+export const baseDir = {
+  url: '/api/avater/upload'
 }

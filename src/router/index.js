@@ -1,13 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
 Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('@/views/Home.vue'), // 替代import Home from '../views/Home.vue' ，使用路由懒加载
+    redirect: '/index',
+    children: [
+      {
+        path: '/index',
+        component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
+        meta: { title: '首页' },
+        children: [
+          {
+            path: '',
+            name: 'Index',
+            component: () => import('@/views/index/IndexContent.vue')
+          },
+          {
+            path: '/index/search',
+            name: 'Search',
+            component: () => import('@/views/index/SearchContent.vue')
+          }
+        ]
+      }
+    ]
   },
   {
     path: '/login',
@@ -20,6 +38,7 @@ const routes = [
 ]
 
 const createRouter = () => new VueRouter({
+  mode: 'history',
   routes
 })
 const router = createRouter()

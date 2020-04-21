@@ -21,6 +21,9 @@ export default {
 <style lang="scss" socped>
 @import "~@/assets/styles/variables.scss";
 @import "~@/assets/styles/mixin.scss";
+.page-footer{
+     box-shadow: 0 1px 3px rgb(177, 175, 175);
+}
 .footer{
    width:224px;
    margin:0 auto;

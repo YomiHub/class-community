@@ -32,6 +32,7 @@
             <el-tabs
               v-model="activeName"
               stretch
+              id="login-tab"
             >
               <el-tab-pane
                 label="登录"
@@ -44,30 +45,36 @@
                   label-width="80px"
                   class="form-wrap"
                 >
-                <el-form-item prop="phone_num" label-width="0">
-                  <el-input
-                    v-model="loginForm.phone_num"
-                    placeholder="手机号"
-                    class="input-wrap"
+                  <el-form-item
+                    prop="phone_num"
+                    label-width="0"
                   >
-                    <i
-                      slot="prefix"
-                      class="el-input__icon el-icon-mobile"
-                    ></i>
-                  </el-input>
-                </el-form-item>
-                <el-form-item prop="user_pass" label-width="0">
-                  <el-input
-                    v-model="loginForm.user_pass"
-                    type="password"
-                    placeholder="密码"
+                    <el-input
+                      v-model="loginForm.phone_num"
+                      placeholder="手机号"
+                      class="input-wrap"
+                    >
+                      <i
+                        slot="prefix"
+                        class="el-input__icon el-icon-mobile"
+                      ></i>
+                    </el-input>
+                  </el-form-item>
+                  <el-form-item
+                    prop="user_pass"
+                    label-width="0"
                   >
-                    <i
-                      slot="prefix"
-                      class="el-input__icon el-icon-lock"
-                    ></i>
-                  </el-input>
-                </el-form-item>
+                    <el-input
+                      v-model="loginForm.user_pass"
+                      type="password"
+                      placeholder="密码"
+                    >
+                      <i
+                        slot="prefix"
+                        class="el-input__icon el-icon-lock"
+                      ></i>
+                    </el-input>
+                  </el-form-item>
                   <el-button
                     :loading="loginLoading"
                     type="primary"
@@ -88,42 +95,51 @@
                   label-width="80px"
                   class="form-wrap"
                 >
-                <el-form-item prop="user_name" label-width="0">
-                  <el-input
-                    v-model="registerForm.user_name"
-                    placeholder="姓名"
-                    class="input-wrap"
+                  <el-form-item
+                    prop="user_name"
+                    label-width="0"
                   >
-                    <i
-                      slot="prefix"
-                      class="el-input__icon el-icon-user-solid"
-                    ></i>
-                  </el-input>
-                </el-form-item>
-                <el-form-item prop="phone_num" label-width="0">
-                  <el-input
-                    v-model="registerForm.phone_num"
-                    placeholder="手机号"
-                    class="input-wrap"
+                    <el-input
+                      v-model="registerForm.user_name"
+                      placeholder="姓名"
+                      class="input-wrap"
+                    >
+                      <i
+                        slot="prefix"
+                        class="el-input__icon el-icon-user-solid"
+                      ></i>
+                    </el-input>
+                  </el-form-item>
+                  <el-form-item
+                    prop="phone_num"
+                    label-width="0"
                   >
-                    <i
-                      slot="prefix"
-                      class="el-input__icon el-icon-mobile"
-                    ></i>
-                  </el-input>
-                </el-form-item>
-                <el-form-item prop="user_pass" label-width="0">
-                  <el-input
-                    v-model="registerForm.user_pass"
-                    type="password"
-                    placeholder="密码"
+                    <el-input
+                      v-model="registerForm.phone_num"
+                      placeholder="手机号"
+                      class="input-wrap"
+                    >
+                      <i
+                        slot="prefix"
+                        class="el-input__icon el-icon-mobile"
+                      ></i>
+                    </el-input>
+                  </el-form-item>
+                  <el-form-item
+                    prop="user_pass"
+                    label-width="0"
                   >
-                    <i
-                      slot="prefix"
-                      class="el-input__icon el-icon-lock"
-                    ></i>
-                  </el-input>
-                </el-form-item>
+                    <el-input
+                      v-model="registerForm.user_pass"
+                      type="password"
+                      placeholder="密码"
+                    >
+                      <i
+                        slot="prefix"
+                        class="el-input__icon el-icon-lock"
+                      ></i>
+                    </el-input>
+                  </el-form-item>
                   <el-button
                     :loading="registerLoading"
                     type="primary"
@@ -164,16 +180,19 @@ export default {
       },
       rules: {
         // 在el-form-item用prop属性指明规则
-        user_name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' }
-        ],
+        user_name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
         user_pass: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
         ],
         phone_num: [
           { required: true, message: '请输入手机号', trigger: 'blur' },
-          { min: 11, max: 15, message: '长度在 11 到 15 个字符', trigger: 'blur' }
+          {
+            min: 11,
+            max: 15,
+            message: '长度在 11 到 15 个字符',
+            trigger: 'blur'
+          }
         ]
       }
     }
@@ -183,15 +202,18 @@ export default {
       this.$refs.registerform.validate(valid => {
         if (valid) {
           this.registerLoading = true
-          register(this.registerForm).then(data => {
-            // 注册成功
-            this.$message('注册成功')
-            this.$refs.registerform.resetFields() // 重置表单
-            this.registerLoading = false
-            this.activeName = 'login'
-          }, (erro) => {
-            this.registerLoading = false
-          })
+          register(this.registerForm).then(
+            data => {
+              // 注册成功
+              this.$message('注册成功')
+              this.$refs.registerform.resetFields() // 重置表单
+              this.registerLoading = false
+              this.activeName = 'login'
+            },
+            erro => {
+              this.registerLoading = false
+            }
+          )
         } else {
           this.$message('注册信息有误')
           return false
@@ -202,13 +224,15 @@ export default {
       this.$refs.loginform.validate(valid => {
         if (valid) {
           this.loginLoading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            console.log('user/login')
-            this.$router.push({ path: this.redirect || '/' })
-            this.loginLoading = false
-          }).catch(() => {
-            this.loginLoading = false
-          })
+          this.$store
+            .dispatch('user/login', this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || '/' })
+              this.loginLoading = false
+            })
+            .catch(() => {
+              this.loginLoading = false
+            })
         } else {
           this.$message('登录信息有误')
           return false
@@ -296,18 +320,17 @@ export default {
     }
   }
 }
-
-.el-tabs {
+</style>
+<style lang="scss">
+#login-tab {
   .el-tabs__header {
     padding: 0 100px;
   }
-  .el-tabs__item{
-    padding:0 6px;
+  .el-tabs__item {
+    padding: 0 6px;
   }
 }
-
-.el-form-item__content{
-  margin-left:0px !important;
+.el-form-item__content {
+  margin-left: 0px !important;
 }
-
 </style>

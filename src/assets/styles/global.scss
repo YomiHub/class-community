@@ -28,8 +28,32 @@ a{
   min-width:$contentWidth;
 }
 
+.border-radius{
+  border:1px solid #ccc;
+  box-shadow: 0 1px 3px #ccc;
+  border-radius: 6px;
+}
+
 // 设置svg父元素的字体大小，svg icon 宽高为1em
 .icon-base{
   font-size:24px;
 }
 
+//超过一行则显示省略号
+.text1-overflow{
+  width:100%;
+  display:inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+//超过两行则省略
+.text2-overflow{
+	width:200px;
+	word-break:break-all;
+	display:-webkit-box;
+	-webkit-line-clamp:2;
+	-webkit-box-orient:vertical;
+	overflow:hidden;
+}

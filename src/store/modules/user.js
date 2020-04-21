@@ -1,5 +1,5 @@
 import { login } from '@/api/user.js'
-import { getToken, setToken, removeToken, getUserName, getUserId, getUserAvater, setUser, removeUser } from '@/utils/authority.js'
+import { getToken, setToken, removeToken, getUserName, getUserId, getUserAvatar, setAvatar, setUser, removeUser } from '@/utils/authority.js'
 import { resetRouter } from '@/router'
 
 export default {
@@ -8,7 +8,7 @@ export default {
     token: getToken(),
     userName: getUserName(),
     userId: getUserId(),
-    userAvater: getUserAvater()
+    userAvatar: getUserAvatar()
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -20,14 +20,15 @@ export default {
     SET_USERID: (state, id) => {
       state.userId = id
     },
-    SET_USERAVATER: (state, avater) => {
-      state.userAvater = avater
+    SET_USERAVATAR: (state, avatar) => {
+      state.userAvatar = avatar
+      setAvatar(avatar)
     },
     LOGOUT: (state) => {
       state.token = ''
       state.userName = ''
       state.userId = ''
-      state.userAvater = ''
+      state.userAvatar = ''
 
       removeToken()
       removeUser()
@@ -42,7 +43,7 @@ export default {
           commit('SET_TOKEN', data.token)
           commit('SET_USERNAME', data.data.user_name)
           commit('SET_USERID', data.data.id)
-          commit('SET_USERAVATER', data.data.avatar_url)
+          commit('SET_USERAVATAR', data.data.avatar_url)
           setToken(data.token)
           setUser(data.data.user_name, data.data.id, data.data.avatar_url)
           resolve()

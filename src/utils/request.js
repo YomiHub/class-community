@@ -64,8 +64,8 @@ const AXIOS_BASE = Axios.create(OPTION)
 AXIOS_BASE.interceptors.request.use(
   (config) => {
     // 在发送请求头之间添加token
-    if (store.getters.token) {
-      config.headers[process.env.VUE_APP_HEADERS_TOKEN] = getToken()
+    if (getToken()) {
+      config.headers[process.env.VUE_APP_HEADERS_TOKEN] = 'Bearer ' + getToken()
     }
     return config
   },
@@ -217,6 +217,8 @@ export default async function ({
       dataType = 'form'
     } else if (contentType.includes('application/json')) {
       dataType = 'json'
+    } else if (contentType.includes('multipart/form-data')) {
+      dataType = 'file'
     }
   }
 
@@ -225,6 +227,8 @@ export default async function ({
     headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
   } else if (dataType === 'json') {
     headers['Content-Type'] = 'application/json;charset=UTF-8'
+  } else if (dataType === 'file') {
+    headers['Content-Type'] = 'multipart/form-data'
   }
 
   // 请求参数
