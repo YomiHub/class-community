@@ -15,8 +15,20 @@
       <el-col :span="6">
         <div class="grid-content bg-purple-light router-wrap">
           <div class="nav-wrap">
-            <router-card :ismanagement="true"></router-card>
-            <router-card :ismanagement="false"></router-card>
+            <router-card
+              :ismanagement="true"
+              v-if="$store.state.user.ifCreate"
+              :name="$store.state.user.create_calssname"
+              :id="$store.state.user.create_calss"
+              :power="3"
+            ></router-card>
+            <router-card
+              :ismanagement="false"
+              v-if="$store.state.user.ifJoin"
+              :name="$store.state.user.join_calssname"
+              :id="$store.state.user.join_calss"
+              :power="$store.state.user.join_power"
+            ></router-card>
             <hot-content></hot-content>
           </div>
         </div>
@@ -30,9 +42,7 @@ import HotContent from '@/components/HotContent.vue'
 
 export default {
   data () {
-    return {
-
-    }
+    return {}
   },
   components: {
     'router-card': RouterCard,

@@ -8,19 +8,9 @@
     <div class="card-router">
       <el-row
         type="flex"
-        justify="space-between"
+        justify="flex-left"
       >
-        <el-col
-          :span="8"
-          class="icon-btn"
-        >
-          <router-link to="/">
-            <span>
-              <svg-icon icon-class="upload"></svg-icon>
-            </span>
-            <p>发布风采</p>
-          </router-link>
-        </el-col>
+
         <el-col
           :span="8"
           class="icon-btn"
@@ -43,10 +33,22 @@
             <p>班级相册</p>
           </router-link>
         </el-col>
+        <el-col
+          :span="8"
+          class="icon-btn"
+        >
+          <router-link to="/">
+            <span>
+              <svg-icon icon-class="leaveword"></svg-icon>
+            </span>
+            <p>班级留言</p>
+          </router-link>
+        </el-col>
+
       </el-row>
       <el-row
         type="flex"
-        justify="space-between"
+        justify="flex-left"
       >
         <el-col
           :span="8"
@@ -61,13 +63,14 @@
         </el-col>
         <el-col
           :span="8"
+          v-if="power>1"
           class="icon-btn"
         >
           <router-link to="/">
             <span>
-              <svg-icon icon-class="leaveword"></svg-icon>
+              <svg-icon icon-class="upload"></svg-icon>
             </span>
-            <p>班级留言</p>
+            <p>发布风采</p>
           </router-link>
         </el-col>
         <el-col
@@ -94,6 +97,7 @@
             <p>申请权限</p>
           </router-link>
         </el-col>
+
       </el-row>
     </div>
   </div>
@@ -102,10 +106,9 @@
 <script>
 export default {
   data () {
-    return {
-    }
+    return {}
   },
-  props: ['ismanagement']
+  props: ['ismanagement', 'power', 'id', 'name']
 }
 </script>
 
@@ -113,7 +116,7 @@ export default {
 @import '~@/assets/styles/mixin.scss';
 .card-wrap {
   border: 1px solid #ccc;
-  margin-bottom:14px;
+  margin-bottom: 14px;
   .card-tag {
     @include flexSet($justify: flex-start, $align: center);
     height: 36px;
@@ -136,11 +139,10 @@ export default {
           font-size: 14px;
           margin: 0;
           padding: 6px 0;
-          &:hover{
-          color:#00BBDD;
+          &:hover {
+            color: #00bbdd;
+          }
         }
-        }
-
       }
     }
   }

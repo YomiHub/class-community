@@ -21,7 +21,7 @@
             tag="i"
             to="/index/search"
             slot="suffix"
-            class="el-input__icon el-icon-search"
+            class="el-input__icon el-icon-search searchicon-btn"
           >
           </router-link>
 
@@ -40,7 +40,7 @@
               <el-dropdown-item command="gopage">我的主页</el-dropdown-item>
               <el-dropdown-item
                 command="change"
-                :disabled="!isManage"
+                :disabled="!$store.state.user.ifCreate"
               >转让班级</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -55,13 +55,13 @@
       title="设置个人信息"
       :visible.sync="ifSetInfoShow"
     >
-      <set-info></set-info>
+      <set-info v-if="ifSetInfoShow" @setInfoClose="setInfoClose"></set-info>
     </el-dialog>
     <el-dialog
       title="转让班级"
       :visible.sync="ifChangeShow"
     >
-      <change-class></change-class>
+      <change-class v-if="ifChangeShow" @changeClass="changeClass"></change-class>
     </el-dialog>
 
   </div>
@@ -76,7 +76,6 @@ export default {
   data () {
     return {
       search: '',
-      isManage: true,
       avatar_url: this.$store.state.user.userAvatar,
       ifSetInfoShow: false,
       ifChangeShow: false
@@ -92,7 +91,6 @@ export default {
         .catch(() => {})
     },
     handleCommand (command) {
-      console.log(command === 'set')
       switch (command) {
         case 'set':
           this.ifSetInfoShow = true
@@ -106,6 +104,12 @@ export default {
         default:
           break
       }
+    },
+    setInfoClose () {
+      this.ifSetInfoShow = false
+    },
+    changeClass () {
+      this.ifChangeShow = false
     }
   },
   components: {
@@ -132,6 +136,7 @@ header {
     width: 326px;
     .el-input__icon {
       color: #000;
+      cursor: pointer;
     }
   }
   .operation {
