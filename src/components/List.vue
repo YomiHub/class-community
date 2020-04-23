@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="item-wrap">
+    <div v-for="item in featureList" v-bind:key="item.id" class="item-wrap">
       <router-link
         to="/"
         tag="div"
@@ -13,7 +13,7 @@
             >
           </div>
           <p class="origin-name">
-            信管1162班
+            {{item.name}}
           </p>
         </div>
       </router-link>
@@ -28,7 +28,7 @@
             class="feature-img"
           >
             <img
-              src="http://localhost:3000/www/useravatar/avatar.webp"
+              :src="item.cover_img"
               alt=""
             >
           </el-col>
@@ -37,79 +37,21 @@
             class="feature-content"
           >
             <router-link to="/">
-              <h4>信管新生联谊活动</h4>
-              <p class="text1-overflow">这是一次印象深刻且非常有意义的联谊，在活动中不仅结交了很多新朋友，而且了解到了很多好玩的游戏，如果你觉得我的简介过长，那就省略吧</p>
+              <h4>{{item.title}}</h4>
+              <p class="text1-overflow">{{item.brief}}</p>
             </router-link>
 
             <ul class="item-icon">
               <li>
                 <a href="javascript:;">
                   <svg-icon icon-class="support"></svg-icon>
-                  <span>200</span>
+                  <span>{{item.likes}}</span>
                 </a>
               </li>
               <li>
                 <a href="javascript:;">
                   <svg-icon icon-class="collect"></svg-icon>
-                  <span>200</span>
-                </a>
-              </li>
-            </ul>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
-    <div class="item-wrap">
-      <router-link
-        to="/"
-        tag="div"
-      >
-        <div class="item-origin">
-          <div class="avater">
-            <img
-              src="http://localhost:3000/www/useravatar/avatar.webp"
-              alt=""
-            >
-          </div>
-          <p class="origin-name">
-            信管1162班
-          </p>
-        </div>
-      </router-link>
-      <div class="content-wrap">
-        <el-row
-          type="flex"
-          justify="space-between"
-        >
-          <el-col
-            :span="3"
-            :offset="1"
-            class="feature-img"
-          >
-            <img
-              src="http://localhost:3000/www/useravatar/avatar.webp"
-              alt=""
-            >
-          </el-col>
-          <el-col
-            :span="20"
-            class="feature-content"
-          >
-          <router-link to="/index?id=1243">
-            <h4>信管新生联谊活动</h4>
-            <p class="text1-overflow">这是一次印象深刻且非常有意义的联谊，在活动中不仅结交了很多新朋友，而且了解到了很多好玩的游戏，如果你觉得我的简介过长，那就省略吧</p>
-          </router-link>
-            <ul class="item-icon">
-              <li>
-                <a href="javascript:;">
-                  <svg-icon icon-class="support"></svg-icon>
-                  <span>200</span>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <svg-icon icon-class="collect"></svg-icon>
-                  <span>200</span>
+                  <span>{{item.collect_count}}</span>
                 </a>
               </li>
             </ul>
@@ -118,12 +60,55 @@
       </div>
     </div>
     <div class="load-more">
-      <el-button plain>加载更多</el-button>
+      <el-button plain v-show="moreBtnShow" @click="getMore">加载更多</el-button>
     </div>
   </div>
 </template>
 <script>
-export default {}
+import { getFeature } from '@/api/feature.js'
+export default {
+  data () {
+    return {
+      pagesize: 2,
+      pageindex: 1,
+      featureTotal: 0,
+      featureList: [],
+      moreBtnShow: true
+    }
+  },
+  created () {
+    this.getList()
+  },
+  methods: {
+    getList () {
+      getFeature({
+        type: this.type,
+        keyword: this.keyword,
+        userid: this.$store.state.user.userId,
+        pagesize: this.pagesize,
+        pageindex: this.pageindex
+      })
+        .then(result => {
+          this.featureTotal = result.total
+          this.featureList = this.featureList.concat(result.data)
+          if (this.pageindex === Math.ceil(this.featureTotal / this.pagesize)) {
+            this.moreBtnShow = false
+          }
+        })
+        .catch(error => {
+          this.$message(error)
+        })
+    },
+    getMore () {
+      this.pageindex++
+      this.getList()
+    }
+  },
+  props: {
+    type: Number,
+    keyword: String
+  }
+}
 </script>
 
 <style lang="scss" scoped>

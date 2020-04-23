@@ -1,15 +1,13 @@
 <template>
   <div>
-    <feature-list></feature-list>
+    <feature-list :type="0" keyword=""></feature-list>
   </div>
 </template>
 <script>
 import List from '../List.vue'
 export default {
   data () {
-    return {
-
-    }
+    return {}
   },
   components: {
     'feature-list': List
@@ -17,5 +15,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 </style>

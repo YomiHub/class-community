@@ -3,7 +3,7 @@
     <header>
       <div class="content-box">
         <a
-          href="/"
+          href="/index"
           class="logo"
         >
           <img
@@ -17,13 +17,12 @@
           class="search-input"
           size="medium"
         >
-          <router-link
-            tag="i"
-            to="/index/search"
+          <i
             slot="suffix"
             class="el-input__icon el-icon-search searchicon-btn"
+            @click="toSearch"
           >
-          </router-link>
+          </i>
 
         </el-input>
         <div class="operation">
@@ -55,13 +54,19 @@
       title="设置个人信息"
       :visible.sync="ifSetInfoShow"
     >
-      <set-info v-if="ifSetInfoShow" @setInfoClose="setInfoClose"></set-info>
+      <set-info
+        v-if="ifSetInfoShow"
+        @setInfoClose="setInfoClose"
+      ></set-info>
     </el-dialog>
     <el-dialog
       title="转让班级"
       :visible.sync="ifChangeShow"
     >
-      <change-class v-if="ifChangeShow" @changeClass="changeClass"></change-class>
+      <change-class
+        v-if="ifChangeShow"
+        @changeClass="changeClass"
+      ></change-class>
     </el-dialog>
 
   </div>
@@ -104,6 +109,13 @@ export default {
         default:
           break
       }
+    },
+    toSearch () {
+      var keyword = this.search
+      // eslint-disable-next-line no-unused-expressions
+      this.$router.push('/index/search/' + keyword)
+
+      // this.$router.push({ name: 'Search', query: { keyword: keyword } })// 使用该方式需要在router.js配置中添加name属性
     },
     setInfoClose () {
       this.ifSetInfoShow = false

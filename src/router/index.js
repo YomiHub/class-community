@@ -19,11 +19,22 @@ const routes = [
             component: () => import('@/views/index/IndexContent.vue')
           },
           {
-            path: '/index/search',
+            path: '/index/search/:keyword',
             name: 'Search',
-            component: () => import('@/views/index/SearchContent.vue')
+            component: () => import('@/views/index/SearchContent.vue'),
+            props: true
           }
         ]
+      },
+      {
+        path: '/index/joinclass',
+        name: 'JoinClass',
+        component: () => import(/* webpackChunkName: "editclass" */ '@/views/editclass/Join.vue')
+      },
+      {
+        path: '/index/createclass',
+        name: 'CreateClass',
+        component: () => import(/* webpackChunkName: "editclass" */ '@/views/editclass/Create.vue')
       }
     ]
   },

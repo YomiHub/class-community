@@ -57,6 +57,7 @@ export default {
     padding: 0 10px;
     .list-wrap {
       padding: 10px 6px;
+      min-height:500px;
     }
   }
 }

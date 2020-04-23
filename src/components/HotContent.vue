@@ -9,22 +9,13 @@
         to="/"
         tag="div"
         class="hot-item"
+        v-for="(item) in hotList"
+        :key="item.id"
       >
-        <h4 class="text1-overflow">这是一个热门标题</h4>
+        <h4 class="text1-overflow">{{item.title }}</h4>
         <div class="describe">
-          <span>点击 300</span>
-          <span>收藏 200</span>
-        </div>
-      </router-link>
-      <router-link
-        to="/"
-        tag="div"
-        class="hot-item"
-      >
-        <h4 class="text1-overflow">这是一个热门标题</h4>
-        <div class="describe">
-          <span>点击 300</span>
-          <span>收藏 200</span>
+          <span>点击量 {{item.clicks}}</span>
+          <span>点赞数 {{item.likes}}</span>
         </div>
       </router-link>
     </div>
@@ -33,7 +24,26 @@
 </template>
 
 <script>
-export default {}
+import { getHotFeature } from '@/api/feature.js'
+export default {
+  data () {
+    return {
+      hotList: []
+    }
+  },
+  created () {
+    this.getHotList()
+  },
+  methods: {
+    getHotList () {
+      getHotFeature().then(result => {
+        this.hotList = result.data
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
