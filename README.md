@@ -54,6 +54,7 @@ git branch --set-upstream-to=origin/hym hym  #origin/hym是远程分支，将本
   - 在 main.js 中导入 element.js
 - 样式处理：`npm i normalize.css nprogress -S`
 - 工具类的库：`npm i js-cookie qs path-to-regexp -S`
+- 富文本工具 `npm install vue-quill-editor -S`
 
 ### browserlist 配置
 

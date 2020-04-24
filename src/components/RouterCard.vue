@@ -2,8 +2,8 @@
   <div class="card-wrap">
     <div class="card-tag">
       <i class="el-icon-caret-right"></i>
-      <span v-if="ismanagement">我的创建</span>
-      <span v-else>我的加入</span>
+      <span v-if="ismanagement">我的创建<span class="color-block"></span>{{name}}</span>
+      <span v-else>我的加入<span class="color-block"></span>{{name}}</span>
     </div>
     <div class="card-router">
       <el-row
@@ -66,12 +66,12 @@
           v-if="power>1"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a href="javasript:;" @click="toFeature">
             <span>
               <svg-icon icon-class="upload"></svg-icon>
             </span>
             <p>发布风采</p>
-          </router-link>
+          </a>
         </el-col>
         <el-col
           v-if="ismanagement"
@@ -108,6 +108,11 @@ export default {
   data () {
     return {}
   },
+  methods: {
+    toFeature () {
+      this.$router.push({ name: 'CreateFeature', params: { class_id: this.id } })
+    }
+  },
   props: ['ismanagement', 'power', 'id', 'name']
 }
 </script>
@@ -117,12 +122,16 @@ export default {
 .card-wrap {
   border: 1px solid #ccc;
   margin-bottom: 14px;
+  .color-block{
+    border:2px solid #00BBDD;
+  }
   .card-tag {
     @include flexSet($justify: flex-start, $align: center);
     height: 36px;
     border-bottom: 1px solid #ccc;
     span {
       font-size: 14px;
+      margin:0 4px;
     }
   }
   .card-router {

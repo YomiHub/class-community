@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <div v-for="item in featureList" v-bind:key="item.id" class="item-wrap">
+  <div v-if="tipShow">
+    <p class="tip">内容暂时为空~</p>
+  </div>
+  <div v-else>
+    <div
+      v-for="item in featureList"
+      v-bind:key="item.id"
+      class="item-wrap"
+    >
       <router-link
         to="/"
         tag="div"
@@ -60,7 +67,11 @@
       </div>
     </div>
     <div class="load-more">
-      <el-button plain v-show="moreBtnShow" @click="getMore">加载更多</el-button>
+      <el-button
+        plain
+        v-show="moreBtnShow"
+        @click="getMore"
+      >加载更多</el-button>
     </div>
   </div>
 </template>
@@ -73,27 +84,42 @@ export default {
       pageindex: 1,
       featureTotal: 0,
       featureList: [],
-      moreBtnShow: true
+      moreBtnShow: true,
+      tipShow: false,
+      ifGetMore: false
     }
   },
   created () {
-    this.getList()
+    this.getList(this.keyword)
   },
   methods: {
-    getList () {
+    getList (key) {
       getFeature({
         type: this.type,
-        keyword: this.keyword,
+        keyword: key,
         userid: this.$store.state.user.userId,
         pagesize: this.pagesize,
         pageindex: this.pageindex
       })
         .then(result => {
           this.featureTotal = result.total
-          this.featureList = this.featureList.concat(result.data)
-          if (this.pageindex === Math.ceil(this.featureTotal / this.pagesize)) {
+          if (this.ifGetMore) {
+            this.featureList = this.featureList.concat(result.data)
+          } else {
+            this.featureList = result.data // 重新搜索
+          }
+
+          if (result.total === 0 || this.pageindex === Math.ceil(this.featureTotal / this.pagesize)) {
             this.moreBtnShow = false
           }
+
+          if (result.total === 0) {
+            this.tipShow = true
+          } else {
+            this.tipShow = false
+          }
+          // 初始化
+          this.ifGetMore = false
         })
         .catch(error => {
           this.$message(error)
@@ -101,7 +127,8 @@ export default {
     },
     getMore () {
       this.pageindex++
-      this.getList()
+      this.ifGetMore = true
+      this.getList(this.keyword)
     }
   },
   props: {
@@ -113,6 +140,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/styles/mixin.scss';
+.tip{
+  padding:30px 0;
+  text-align:center;
+}
 .item-wrap {
   margin-top: 10px;
   padding: 10px 20px;
@@ -128,7 +159,7 @@ export default {
     p {
       margin: 0 0 0 6px;
       font-size: 14px;
-      color:#b2bac2;
+      color: #b2bac2;
     }
   }
   .content-wrap {
@@ -139,32 +170,33 @@ export default {
       }
     }
     .feature-content {
-      a{
-        color:#2e3135;
+      a {
+        color: #2e3135;
       }
-      h4,p{
+      h4,
+      p {
         margin: 0;
       }
-      p{
-        padding:8px 0;
-        font-size:14px;
+      p {
+        padding: 8px 0;
+        font-size: 14px;
       }
       .item-icon {
         @include flexSet($justify: flex-start, $align: center);
         li {
           padding: 0 20px 0 0;
-          span{
-            font-size:14px;
-            color:#b2bac2;
-            padding-left:4px;
+          span {
+            font-size: 14px;
+            color: #b2bac2;
+            padding-left: 4px;
           }
         }
       }
     }
   }
 }
-.load-more{
-    @include flexSet($justify: center, $align: center);
-    margin-top:20px;
-  }
+.load-more {
+  @include flexSet($justify: center, $align: center);
+  margin-top: 20px;
+}
 </style>

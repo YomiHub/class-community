@@ -1,6 +1,10 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+import Router from 'vue-router'
+// const routerPush = Router.prototype.push
+// Router.prototype.push = function push (location) {
+//   return routerPush.call(this, location).catch(error => error)
+// }
+Vue.use(Router)
 const routes = [
   {
     path: '/',
@@ -19,7 +23,7 @@ const routes = [
             component: () => import('@/views/index/IndexContent.vue')
           },
           {
-            path: '/index/search/:keyword',
+            path: '/index/search',
             name: 'Search',
             component: () => import('@/views/index/SearchContent.vue'),
             props: true
@@ -35,6 +39,12 @@ const routes = [
         path: '/index/createclass',
         name: 'CreateClass',
         component: () => import(/* webpackChunkName: "editclass" */ '@/views/editclass/Create.vue')
+      },
+      {
+        path: '/index/createfeature',
+        name: 'CreateFeature',
+        component: () => import(/* webpackChunkName: "createfeature" */ '@/views/feature/Create.vue'),
+        props: true
       }
     ]
   },
@@ -48,7 +58,7 @@ const routes = [
   }
 ]
 
-const createRouter = () => new VueRouter({
+const createRouter = () => new Router({
   mode: 'history',
   routes
 })

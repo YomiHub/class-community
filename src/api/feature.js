@@ -25,3 +25,29 @@ export function getHotFeature () {
     loading: true
   })
 }
+
+export const uploadUrl = {
+  featureUrl: '/api/feature/uploadimg'
+}
+
+export function uploadImg (data) {
+  return request({
+    url: '/feature/uploadimg',
+    method: 'post',
+    data: data,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    dataType: 'file',
+    loading: true
+  })
+}
+
+export function uploadFeature (data) {
+  return request({
+    url: '/feature/upload',
+    method: 'post',
+    data: data,
+    loading: true
+  })
+}

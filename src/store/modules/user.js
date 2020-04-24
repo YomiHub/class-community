@@ -15,7 +15,8 @@ export default {
     create_calssname: '',
     join_calss: '',
     join_calssname: '',
-    join_power: 1 // 加入班级的权限，默认为普通成员
+    join_power: 1, // 加入班级的权限，默认为普通成员
+    search_key: ''
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -43,11 +44,14 @@ export default {
     SET_CLASSINFO: (state, classInfo) => {
       state.ifCreate = classInfo.ifCreate
       state.ifJoin = classInfo.ifJoin
-      state.create_calss = classInfo.create_calss
-      state.create_calssname = classInfo.create_calssname
-      state.join_calss = classInfo.join_calss
-      state.join_calssname = classInfo.join_calssname
+      state.create_calss = classInfo.create_class
+      state.create_calssname = classInfo.create_classname
+      state.join_calss = classInfo.join_class
+      state.join_calssname = classInfo.join_classname
       state.join_power = classInfo.join_power
+    },
+    SET_SEARCHKEY: (state, key) => {
+      state.search_key = key
     }
   },
   actions: {

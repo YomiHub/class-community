@@ -101,7 +101,7 @@ export default {
           this.ifSetInfoShow = true
           break
         case 'gopage':
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: '/index/createfeature' })
           break
         case 'change':
           this.ifChangeShow = true
@@ -111,11 +111,22 @@ export default {
       }
     },
     toSearch () {
-      var keyword = this.search
+      if (this.search.length === 0) {
+        this.$message({ message: '搜索关键词不能为空', duration: 1000 })
+        return
+      }
       // eslint-disable-next-line no-unused-expressions
-      this.$router.push('/index/search/' + keyword)
-
-      // this.$router.push({ name: 'Search', query: { keyword: keyword } })// 使用该方式需要在router.js配置中添加name属性
+      // this.$router.push('/index/search/' + keyword).catch(err => err)
+      if (this.$route.name === 'Search') {
+        // 已经在搜索页，更新数据
+        this.$store.commit('user/SET_SEARCHKEY', this.search)
+      } else {
+        // 跳转到搜索页
+        this.$router.replace({
+          name: 'Search',
+          params: { keyword: this.search }
+        })
+      }
     },
     setInfoClose () {
       this.ifSetInfoShow = false
