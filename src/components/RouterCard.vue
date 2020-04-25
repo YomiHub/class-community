@@ -26,12 +26,15 @@
           :span="8"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a
+            href="javascript:;"
+            @click="toClassAlbum"
+          >
             <span>
               <svg-icon icon-class="picture"></svg-icon>
             </span>
             <p>班级相册</p>
-          </router-link>
+          </a>
         </el-col>
         <el-col
           :span="8"
@@ -66,7 +69,10 @@
           v-if="power>1"
           class="icon-btn"
         >
-          <a href="javasript:;" @click="toFeature">
+          <a
+            href="javasript:;"
+            @click="toFeature"
+          >
             <span>
               <svg-icon icon-class="upload"></svg-icon>
             </span>
@@ -110,7 +116,16 @@ export default {
   },
   methods: {
     toFeature () {
-      this.$router.push({ name: 'CreateFeature', params: { class_id: this.id } })
+      this.$router.push({
+        name: 'CreateFeature',
+        params: { class_id: this.id }
+      })
+    },
+    toClassAlbum () {
+      this.$router.push({
+        name: 'ClassAlbum',
+        params: { class_id: this.id }
+      })
     }
   },
   props: ['ismanagement', 'power', 'id', 'name']
@@ -122,8 +137,8 @@ export default {
 .card-wrap {
   border: 1px solid #ccc;
   margin-bottom: 14px;
-  .color-block{
-    border:2px solid #00BBDD;
+  .color-block {
+    border: 2px solid #00bbdd;
   }
   .card-tag {
     @include flexSet($justify: flex-start, $align: center);
@@ -131,7 +146,7 @@ export default {
     border-bottom: 1px solid #ccc;
     span {
       font-size: 14px;
-      margin:0 4px;
+      margin: 0 4px;
     }
   }
   .card-router {
