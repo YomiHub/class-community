@@ -51,6 +51,12 @@ const routes = [
         name: 'ClassAlbum',
         component: () => import(/* webpackChunkName: "classAlbum" */ '@/views/class/ClassAlbum.vue'),
         props: true
+      },
+      {
+        path: '/index/featuredetail/:id',
+        name: 'featureDetail',
+        component: () => import(/* webpackChunkName: "featureDetail" */ '@/views/feature/Detail.vue'),
+        props: true
       }
     ]
   },

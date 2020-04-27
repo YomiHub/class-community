@@ -15,7 +15,7 @@
         <div class="item-origin">
           <div class="avater">
             <img
-              src="http://localhost:3000/www/useravatar/avatar.webp"
+              :src="item.logo_url"
               alt=""
             >
           </div>
@@ -43,7 +43,7 @@
             :span="20"
             class="feature-content"
           >
-            <router-link to="/">
+            <router-link :to="'/index/featuredetail/'+item.id">
               <h4>{{item.title}}</h4>
               <p class="text1-overflow">{{item.brief}}</p>
             </router-link>

@@ -1,6 +1,6 @@
 // 用法：<div>{{data | dataFormat('yyyy-MM-dd hh:mm:ss')}}</div>
 export function dateFormat (value, pattern = 'YYYY-MM-DD HH:mm:ss') {
-  const getDate = new Date(value)
+  const getDate = new Date(Date.parse(value))
   const o = {
     'M+': getDate.getMonth() + 1,
     'd+': getDate.getDate(),
