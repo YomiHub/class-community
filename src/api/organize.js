@@ -217,3 +217,78 @@ export function readNotice (data) {
     data: data
   })
 }
+
+export const leaveFileDir = {
+  url: 'api/class/leavefile'
+}
+
+/**
+ *
+ *
+ * @export
+ * @param {class_id,pageindex,pagesize}
+ * @returns
+ */
+export function getLeaveList (data) {
+  return request({
+    url: '/class/getleavelist',
+    method: 'get',
+    data: data
+  })
+}
+
+/**
+ * @export
+ * @param {class_id}
+ * @returns
+ */
+export function getClassInfo (data) {
+  return request({
+    url: '/class/getclassinfo',
+    method: 'get',
+    data: data,
+    loading: true
+  })
+}
+
+export function leaveFileUpload (data) {
+  return request({
+    url: '/class/leavefile',
+    method: 'post',
+    data: data,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    dataType: 'file',
+    loading: true
+  })
+}
+
+/**
+ *
+ *
+ * @export
+ * @param {class_id,user_id,content,notice_file,leave_time}
+ * @returns
+ */
+export function leaveUpload (data) {
+  return request({
+    url: '/class/leaveupload',
+    method: 'post',
+    data: data,
+    loading: true
+  })
+}
+
+/**
+ * @export
+ * @param {leave_id,user_id}
+ * @returns
+ */
+export function delLeave (data) {
+  return request({
+    url: '/class/delleave',
+    method: 'delete',
+    data: data
+  })
+}

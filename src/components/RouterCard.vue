@@ -15,8 +15,10 @@
           :span="8"
           class="icon-btn"
         >
-          <a href="javascript:;"
-            @click="toClassNotice">
+          <a
+            href="javascript:;"
+            @click="toClassNotice"
+          >
             <span>
               <svg-icon icon-class="message"></svg-icon>
             </span>
@@ -41,12 +43,15 @@
           :span="8"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a
+            href="javascript:;"
+            @click="toClassLeave"
+          >
             <span>
               <svg-icon icon-class="leaveword"></svg-icon>
             </span>
             <p>班级留言</p>
-          </router-link>
+          </a>
         </el-col>
 
       </el-row>
@@ -131,6 +136,12 @@ export default {
     toClassNotice () {
       this.$router.push({
         name: 'ClassNotice',
+        params: { class_id: this.id }
+      })
+    },
+    toClassLeave () {
+      this.$router.push({
+        name: 'ClassLeave',
         params: { class_id: this.id }
       })
     }

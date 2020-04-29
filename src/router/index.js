@@ -62,6 +62,11 @@ const routes = [
         name: 'ClassNotice',
         component: () => import(/* webpackChunkName: "classNotice" */ '@/views/class/ClassNotice.vue'),
         props: true
+      }, {
+        path: '/index/classleave',
+        name: 'ClassLeave',
+        component: () => import(/* webpackChunkName: "classLeave" */ '@/views/class/ClassLeave.vue'),
+        props: true
       }
     ]
   },
