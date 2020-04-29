@@ -41,6 +41,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "editclass" */ '@/views/editclass/Create.vue')
       },
       {
+        path: '/index/featuredetail/:id',
+        name: 'featureDetail',
+        component: () => import(/* webpackChunkName: "featureDetail" */ '@/views/feature/Detail.vue'),
+        props: true
+      },
+      {
         path: '/index/createfeature',
         name: 'CreateFeature',
         component: () => import(/* webpackChunkName: "createfeature" */ '@/views/feature/Create.vue'),
@@ -51,11 +57,10 @@ const routes = [
         name: 'ClassAlbum',
         component: () => import(/* webpackChunkName: "classAlbum" */ '@/views/class/ClassAlbum.vue'),
         props: true
-      },
-      {
-        path: '/index/featuredetail/:id',
-        name: 'featureDetail',
-        component: () => import(/* webpackChunkName: "featureDetail" */ '@/views/feature/Detail.vue'),
+      }, {
+        path: '/index/classnotice',
+        name: 'ClassNotice',
+        component: () => import(/* webpackChunkName: "classNotice" */ '@/views/class/ClassNotice.vue'),
         props: true
       }
     ]

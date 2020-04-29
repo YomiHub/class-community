@@ -6,7 +6,7 @@
     </div>
     <div class="hot-message">
       <router-link
-        to="/"
+        :to="'/index/featuredetail/'+item.id"
         tag="div"
         class="hot-item"
         v-for="(item) in hotList"

@@ -314,7 +314,7 @@ export default {
       featureDetail: {},
       rules: {
         content: [
-          { requires: true, message: '请输入评论内容', trigger: 'blur' }
+          { required: true, message: '请输入评论内容', trigger: 'blur' }
         ]
       },
       commentForm: {

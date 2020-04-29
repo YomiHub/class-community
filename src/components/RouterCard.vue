@@ -15,12 +15,13 @@
           :span="8"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a href="javascript:;"
+            @click="toClassNotice">
             <span>
               <svg-icon icon-class="message"></svg-icon>
             </span>
             <p>班级公告</p>
-          </router-link>
+          </a>
         </el-col>
         <el-col
           :span="8"
@@ -124,6 +125,12 @@ export default {
     toClassAlbum () {
       this.$router.push({
         name: 'ClassAlbum',
+        params: { class_id: this.id }
+      })
+    },
+    toClassNotice () {
+      this.$router.push({
+        name: 'ClassNotice',
         params: { class_id: this.id }
       })
     }
