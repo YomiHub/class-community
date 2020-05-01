@@ -292,3 +292,73 @@ export function delLeave (data) {
     data: data
   })
 }
+
+/**
+ * @export
+ * @param {class_id,user_id}
+ * @returns
+ */
+export function getMember (data) {
+  return request({
+    url: '/class/getmember',
+    method: 'get',
+    data: data
+  })
+}
+
+/**
+ * @export
+ * @param {class_id,user_id}
+ * @returns
+ */
+export function delMember (data) {
+  return request({
+    url: '/class/delmember',
+    method: 'delete',
+    data: data
+  })
+}
+
+/**
+ * @export
+ * @param {class_id,user_id}
+ * @returns
+ */
+export function getMemberExcel (data) {
+  return request({
+    url: '/class/getmemberexcel',
+    method: 'get',
+    data: data
+  })
+}
+
+/**
+ * @export
+ * @param {class_id} data
+ * @returns
+ */
+export function getApplyList (data) {
+  return request({
+    url: '/class/getapplylist',
+    method: 'get',
+    data: data
+  })
+}
+
+export function handlePower (data) {
+  return request({
+    url: '/class/handlepower',
+    method: 'put',
+    data: data,
+    loading: true
+  })
+}
+
+export function removePower (data) {
+  return request({
+    url: '/class/removepower',
+    method: 'put',
+    data: data,
+    loading: true
+  })
+}

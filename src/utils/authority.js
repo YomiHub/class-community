@@ -38,6 +38,12 @@ export function setAvatar (userAvatar = '') {
   )
 }
 
+export function setUserName (setUserName = '') {
+  return (
+    Cookies.set(UserNameKey, setUserName)
+  )
+}
+
 export function setUser (userName = '', userId = '', userAvatar = '') {
   return (
     Cookies.set(UserNameKey, userName) &&

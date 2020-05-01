@@ -132,3 +132,27 @@ export function changeClass (data) {
     loading: true
   })
 }
+
+/**
+ *
+ *
+ * @export
+ * @param {user_id} data
+ */
+export function getApplyStatus (data) {
+  return request({
+    url: '/userinfo/getapplystatus',
+    method: 'get',
+    data,
+    loading: true
+  })
+}
+
+export function sendApply (data) {
+  return request({
+    url: '/userinfo/sendapply',
+    method: 'put',
+    data: data,
+    loading: true
+  })
+}

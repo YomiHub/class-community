@@ -1,5 +1,5 @@
 import { login, getClassRelation } from '@/api/user.js'
-import { getToken, setToken, removeToken, getUserName, getUserId, getUserAvatar, setAvatar, setUser, removeUser } from '@/utils/authority.js'
+import { getToken, setToken, removeToken, getUserName, getUserId, getUserAvatar, setAvatar, setUserName, setUser, removeUser } from '@/utils/authority.js'
 import { resetRouter } from '@/router'
 
 export default {
@@ -24,6 +24,7 @@ export default {
     },
     SET_USERNAME: (state, name) => {
       state.userName = name
+      setUserName(name)
     },
     SET_USERID: (state, id) => {
       state.userId = id

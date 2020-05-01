@@ -63,12 +63,15 @@
           :span="8"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a
+            href="javascript:;"
+            @click="toClassMember"
+          >
             <span>
               <svg-icon icon-class="member"></svg-icon>
             </span>
             <p>班级成员</p>
-          </router-link>
+          </a>
         </el-col>
         <el-col
           :span="8"
@@ -90,35 +93,64 @@
           :span="8"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a
+            href="javasript:;"
+            @click.prevent="toPowerCheck">
             <span>
               <svg-icon icon-class="check"></svg-icon>
             </span>
             <p>权限审核</p>
-          </router-link>
+          </a>
         </el-col>
         <el-col
           v-else
           :span="8"
           class="icon-btn"
         >
-          <router-link to="/">
+          <a
+            href="javasript:;"
+            @click.prevent="toPowerApply">
             <span>
               <svg-icon icon-class="apply"></svg-icon>
             </span>
             <p>申请权限</p>
-          </router-link>
+          </a>
         </el-col>
 
       </el-row>
     </div>
+    <el-dialog
+      title="权限审核"
+      :visible.sync="ifCheckPowerShow"
+    >
+      <power-check
+        v-if="ifCheckPowerShow"
+        :class_id="id"
+        :class_name="name"
+      ></power-check>
+    </el-dialog>
+    <el-dialog
+      title="申请权限"
+      :visible.sync="ifPowerAplyShow"
+    >
+      <power-apply
+        v-if="ifPowerAplyShow"
+        :class_id="id"
+        :class_name="name"
+      ></power-apply>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import PowerApply from '@/components/popdialog/PowerApply.vue'
+import PowerCheck from '@/components/popdialog/PowerCheck.vue'
 export default {
   data () {
-    return {}
+    return {
+      ifCheckPowerShow: false,
+      ifPowerAplyShow: false
+    }
   },
   methods: {
     toFeature () {
@@ -144,9 +176,25 @@ export default {
         name: 'ClassLeave',
         params: { class_id: this.id }
       })
+    },
+    toClassMember () {
+      this.$router.push({
+        name: 'ClassMember',
+        params: { class_id: this.id }
+      })
+    },
+    toPowerCheck () {
+      this.ifCheckPowerShow = true
+    },
+    toPowerApply () {
+      this.ifPowerAplyShow = true
     }
   },
-  props: ['ismanagement', 'power', 'id', 'name']
+  props: ['ismanagement', 'power', 'id', 'name'],
+  components: {
+    'power-apply': PowerApply,
+    'power-check': PowerCheck
+  }
 }
 </script>
 

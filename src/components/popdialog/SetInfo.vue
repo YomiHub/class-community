@@ -59,7 +59,12 @@
 </template>
 
 <script>
-import { avatarUpload, baseDir, updateUserInfo, getUserInfo } from '@/api/user.js'
+import {
+  avatarUpload,
+  baseDir,
+  updateUserInfo,
+  getUserInfo
+} from '@/api/user.js'
 export default {
   data () {
     return {
@@ -164,6 +169,7 @@ export default {
             .then(data => {
               if (data.status === 0) {
                 this.$emit('setInfoClose')
+                this.$store.commit('user/SET_USERNAME', this.userForm.user_name) // 将最新的头像更新到store、cookie
                 this.$message('信息设置成功~')
               } else {
                 this.$message(data.message)
