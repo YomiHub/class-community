@@ -362,3 +362,12 @@ export function removePower (data) {
     loading: true
   })
 }
+
+export function classSupport (data) {
+  return request({
+    url: '/class/classsupport',
+    method: 'put',
+    data: data,
+    loading: true
+  })
+}

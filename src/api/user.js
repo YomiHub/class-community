@@ -156,3 +156,12 @@ export function sendApply (data) {
     loading: true
   })
 }
+
+export function getUserFocus (data) {
+  return request({
+    url: '/userinfo/getuserfocus',
+    method: 'get',
+    data,
+    loading: true
+  })
+}

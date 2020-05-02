@@ -19,7 +19,7 @@
             <el-image
               :src="item.photo_url"
               fit="cover"
-              lazy
+              :lazy="ifLazy"
             >
             </el-image>
           </a>
@@ -60,7 +60,9 @@ export default {
     }
   },
   created () {
-    this.getPhotos(this.albumid)
+    if (this.albumid) {
+      this.getPhotos(this.albumid)
+    }
   },
   methods: {
     getPhotos (newId) {
@@ -120,7 +122,7 @@ export default {
       this.getPhotos(newId)
     }
   },
-  props: ['albumid', 'haspower']
+  props: ['albumid', 'haspower', 'ifLazy']
 }
 </script>
 

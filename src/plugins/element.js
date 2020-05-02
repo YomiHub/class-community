@@ -2,7 +2,8 @@ import Vue from 'vue'
 import {
   Button, Tabs, TabPane, Form, FormItem, Input,
   Message, Dropdown, DropdownMenu, DropdownItem, Row, Col, Dialog, Upload, Radio,
-  Menu, MenuItem, Image, Avatar, pagination, Link, Table, TableColumn
+  Menu, MenuItem, Image, Avatar, pagination, Link, Table, TableColumn,
+  Collapse, CollapseItem
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Tabs)
@@ -26,4 +27,6 @@ Vue.use(pagination)
 Vue.use(Link)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Collapse)
+Vue.use(CollapseItem)
 Vue.prototype.$message = Message

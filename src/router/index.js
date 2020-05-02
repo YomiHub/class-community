@@ -72,6 +72,16 @@ const routes = [
         name: 'ClassMember',
         component: () => import(/* webpackChunkName: "classMember" */ '@/views/class/ClassMember.vue'),
         props: true
+      }, {
+        path: '/index/classpage/:id',
+        name: 'ClassPage',
+        component: () => import(/* webpackChunkName: "classPage" */ '@/views/class/ClassPage.vue'),
+        props: true
+      }, {
+        path: '/index/userpage/:id',
+        name: 'UserPage',
+        component: () => import(/* webpackChunkName: "userPage" */ '@/views/user/UserPage.vue'),
+        props: true
       }
     ]
   },

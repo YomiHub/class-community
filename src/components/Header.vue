@@ -101,7 +101,7 @@ export default {
           this.ifSetInfoShow = true
           break
         case 'gopage':
-          this.$router.push({ path: '/index/createfeature' })
+          this.$router.push({ path: '/index/userpage/' + this.$store.state.user.userId })
           break
         case 'change':
           this.ifChangeShow = true

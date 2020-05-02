@@ -92,6 +92,7 @@
               <el-button
                 type="primary"
                 plain
+                @click="gotoClassPage(featureDetail.class_id)"
               >查看主页</el-button>
               <el-button
                 v-if="featureDetail.if_focus==1"
@@ -142,10 +143,15 @@
               >
                 <el-row class="author-info">
                   <el-col :span="3">
+                    <router-link
+                      :to="'/index/userpage/'+item.comment_user"
+                      tag="div"
+                    >
                     <el-avatar
                       :size="30"
                       :src="item.avatar_url"
                     ></el-avatar>
+                    </router-link>
                   </el-col>
 
                   <el-col :span="21">
@@ -189,10 +195,15 @@
                         >
                           <el-row>
                             <el-col :span="3">
+                              <router-link
+                                :to="'/index/userpage/'+reply.reply_user"
+                                tag="div"
+                              >
                               <el-avatar
                                 :size="20"
                                 :src="reply.avatar_url"
                               ></el-avatar>
+                              </router-link>
                             </el-col>
 
                             <el-col :span="21">
@@ -535,6 +546,9 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    gotoClassPage (classId) {
+      this.$router.push('/index/classpage/' + classId)
     }
   },
   filters: {

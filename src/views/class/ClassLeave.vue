@@ -64,7 +64,7 @@
             type="flex"
             align="center"
           >
-            <div class="leave-origin user-origin">
+            <router-link :to="'/index/userpage/'+item.user_id" tag="div" class="leave-origin user-origin">
               <div class="avater">
                 <el-image
                   :src="item.avatar_url"
@@ -76,7 +76,7 @@
               <p class="origin-name">
                 {{item.user_name}}
               </p>
-            </div>
+            </router-link>
           </el-row>
           <el-row class="content-wrap">
             <div class="content">
@@ -149,7 +149,7 @@ export default {
   },
   methods: {
     initClassInfo () {
-      getClassInfo({ class_id: this.class_id })
+      getClassInfo({ class_id: this.class_id, user_id: this.$store.state.user.userId })
         .then(result => {
           if (result.status === 0) {
             this.className = result.name

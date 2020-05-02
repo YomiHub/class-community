@@ -9,7 +9,7 @@
       class="item-wrap"
     >
       <router-link
-        :to="'/index/classpage/'+item.class_id"
+        :to="'/index/classpage/'+item.id"
         tag="div"
       >
         <div class="item-origin">
@@ -50,15 +50,16 @@
 
             <ul class="item-icon">
               <li>
-                <svg-icon icon-class="support"></svg-icon>
-                <span>{{item.likes}}</span>
-
+                <a href="javascript:;">
+                  <svg-icon icon-class="support"></svg-icon>
+                  <span>{{item.likes}}</span>
+                </a>
               </li>
               <li>
-
-                <svg-icon icon-class="collect"></svg-icon>
-                <span>{{item.collect_count}}</span>
-
+                <a href="javascript:;">
+                  <svg-icon icon-class="collect"></svg-icon>
+                  <span>{{item.collect_count}}</span>
+                </a>
               </li>
             </ul>
           </el-col>
@@ -75,67 +76,19 @@
   </div>
 </template>
 <script>
-import { getFeature } from '@/api/feature.js'
 export default {
   data () {
-    return {
-      pagesize: 2,
-      pageindex: 1,
-      featureTotal: 0,
-      featureList: [],
-      moreBtnShow: true,
-      tipShow: false,
-      ifGetMore: false
-    }
-  },
-  created () {
-    this.getList(this.keyword)
+    return {}
   },
   methods: {
-    getList (key) {
-      getFeature({
-        type: this.type,
-        keyword: key,
-        userid: this.$store.state.user.userId,
-        pagesize: this.pagesize,
-        pageindex: this.pageindex
-      })
-        .then(result => {
-          this.featureTotal = result.total
-          if (this.ifGetMore) {
-            this.featureList = this.featureList.concat(result.data)
-          } else {
-            this.featureList = result.data // 重新搜索
-          }
-
-          if (
-            result.total === 0 ||
-            this.pageindex === Math.ceil(this.featureTotal / this.pagesize)
-          ) {
-            this.moreBtnShow = false
-          }
-
-          if (result.total === 0) {
-            this.tipShow = true
-          } else {
-            this.tipShow = false
-          }
-          // 初始化
-          this.ifGetMore = false
-        })
-        .catch(error => {
-          this.$message(error)
-        })
-    },
     getMore () {
-      this.pageindex++
-      this.ifGetMore = true
-      this.getList(this.keyword)
+      this.$emit('getMore')
     }
   },
   props: {
-    type: Number,
-    keyword: String
+    featureList: Array,
+    moreBtnShow: Boolean,
+    tipShow: Boolean
   }
 }
 </script>

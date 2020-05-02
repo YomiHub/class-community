@@ -207,3 +207,35 @@ export function removeFocus (data) {
     loading: true
   })
 }
+
+/* data:{
+  class_id:
+  pageindex:
+  pagesize:
+}
+*/
+
+export function getClassFeature (data) {
+  return request({
+    url: '/feature/getclasslist',
+    method: 'get',
+    data: data,
+    loading: true
+  })
+}
+
+/* data:{
+  user_id:
+  pageindex:
+  pagesize:
+}
+*/
+
+export function getCollectFeature (data) {
+  return request({
+    url: '/feature/getcollectlist',
+    method: 'get',
+    data: data,
+    loading: true
+  })
+}
