@@ -657,7 +657,7 @@ export default {
         margin-top: 20px;
         border: 1px solid #ccc;
         position: relative;
-        height: 800px;
+        height: 600px;
         overflow: auto;
         .bar {
           border-bottom: 1px solid #ccc;

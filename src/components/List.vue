@@ -79,7 +79,7 @@ import { getFeature } from '@/api/feature.js'
 export default {
   data () {
     return {
-      pagesize: 2,
+      pagesize: 5,
       pageindex: 1,
       featureTotal: 0,
       featureList: [],

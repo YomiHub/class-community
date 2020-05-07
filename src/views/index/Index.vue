@@ -34,19 +34,55 @@
         </div>
       </el-col>
     </el-row>
+    <el-button
+      type="primary"
+      icon="el-icon-message"
+      circle
+      class="comin-btn"
+      @click="showRoom"
+    ></el-button>
+    <el-dialog
+      :title="'聊天室('+$store.state.socket.onlineCount+'人在线)'"
+      :visible.sync="ifRoomShow"
+      :before-close="handleClose"
+    >
+      <chat-room
+        v-if="ifRoomShow"
+        @closeRoom="closeRoom"
+      >
+      </chat-room>
+    </el-dialog>
+
   </div>
 </template>
 <script>
 import RouterCard from '@/components/RouterCard.vue'
 import HotContent from '@/components/HotContent.vue'
+import Communication from '@/components/popdialog/Communication.vue'
 
 export default {
   data () {
-    return {}
+    return {
+      ifRoomShow: false
+    }
+  },
+  methods: {
+    showRoom () {
+      this.ifRoomShow = true
+    },
+    closeRoom () {
+      this.ifRoomShow = false
+    },
+    handleClose (done) {
+      // 点击关闭按钮获遮罩时触发
+      this.$store.dispatch('socket/closeSocket') // 关闭SocketIO
+      done()
+    }
   },
   components: {
     'router-card': RouterCard,
-    'hot-content': HotContent
+    'hot-content': HotContent,
+    'chat-room': Communication
   }
 }
 </script>
@@ -57,8 +93,21 @@ export default {
     padding: 0 10px;
     .list-wrap {
       padding: 10px 6px;
-      min-height:500px;
+      min-height: 500px;
     }
   }
 }
+</style>
+
+<style lang="scss">
+.comin-btn {
+  position: fixed;
+  top: 50%;
+  right: 10px;
+}
+
+  .el-dialog {
+    background: #fafafa;
+  }
+
 </style>

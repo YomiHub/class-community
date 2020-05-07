@@ -126,7 +126,7 @@ export default {
           this.$message('内容没有填写完整')
         }
       })
-      console.log('submit!')
+      // console.log('submit!')
     },
     beforeCoverUpload (file) {
       const isLt2M = file.size / 1024 / 1024 < 2

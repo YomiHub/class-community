@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
-
+import socket from './modules/socket'
 Vue.use(Vuex)
 
 /*
@@ -14,6 +14,7 @@ actions:  this.$store.dispatch('模块名/actions_name')
 */
 export default new Vuex.Store({
   modules: {
-    user
+    user,
+    socket
   }
 })

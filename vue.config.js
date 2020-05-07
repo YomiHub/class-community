@@ -27,7 +27,15 @@ module.exports = {
         pathRewrite: {
           '^/api': '/api' // 真实后台接口需要带 /api
         }
-      }
+      }/* ,
+      '/socket': { // 设置websocket代理
+        target: process.VUE_APP_BASE_SOCKET_URL,
+        ws: true, // 开启websocket代理  注意
+        changeOrigin: true,
+        pathRewrite: {
+          '^/socket': ''
+        }
+      } */
     }
   },
   configureWebpack: { // https://cli.vuejs.org/zh/config/#configurewebpack
