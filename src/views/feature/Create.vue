@@ -89,7 +89,7 @@ export default {
           { required: true, message: '请输入简介', trigger: 'blur' },
           {
             min: 1,
-            max: 15,
+            max: 200,
             message: '长度在 1 到 200 个字符',
             trigger: 'blur'
           }
@@ -123,7 +123,7 @@ export default {
             console.log(err)
           })
         } else {
-          this.$message('内容没有填写完整')
+          this.$message('信息填写不完整')
         }
       })
       // console.log('submit!')

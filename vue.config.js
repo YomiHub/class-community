@@ -29,7 +29,7 @@ module.exports = {
         }
       }/* ,
       '/socket': { // 设置websocket代理
-        target: process.VUE_APP_BASE_SOCKET_URL,
+        target: process.env.VUE_APP_BASE_SOCKET_URL,
         ws: true, // 开启websocket代理  注意
         changeOrigin: true,
         pathRewrite: {

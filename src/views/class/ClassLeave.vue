@@ -4,14 +4,19 @@
       <div class="leave-board border-radius">
         <header>
           <div class="leave-origin class-origin">
-            <div class="avater">
+            <router-link
+              :to="'/index/classpage/'+class_id"
+              tag="div"
+              class="avater"
+            >
+
               <img
-                src="http://localhost:3000/www/useravatar/1587473110621-avatar.webp"
+                :src="classAvatar"
                 alt="logo"
               >
-            </div>
+            </router-link>
             <p class="origin-name">
-              信管1162
+              {{className}}
             </p>
           </div>
         </header>
@@ -64,7 +69,11 @@
             type="flex"
             align="center"
           >
-            <router-link :to="'/index/userpage/'+item.user_id" tag="div" class="leave-origin user-origin">
+            <router-link
+              :to="'/index/userpage/'+item.user_id"
+              tag="div"
+              class="leave-origin user-origin"
+            >
               <div class="avater">
                 <el-image
                   :src="item.avatar_url"
@@ -149,11 +158,14 @@ export default {
   },
   methods: {
     initClassInfo () {
-      getClassInfo({ class_id: this.class_id, user_id: this.$store.state.user.userId })
+      getClassInfo({
+        class_id: this.class_id,
+        user_id: this.$store.state.user.userId
+      })
         .then(result => {
           if (result.status === 0) {
-            this.className = result.name
-            this.classAvatar = result.logo_url
+            this.className = result.data.name
+            this.classAvatar = result.data.logo_url
           } else {
             this.$message('网络请求有误！')
           }
@@ -215,7 +227,7 @@ export default {
               if (this.leaveContent.length !== 0) {
                 this.uploadContent(filePath)
               } else {
-                this.$message('请填写完整')
+                this.$message('信息填写不完整')
               }
             } else {
               this.$message(res.message)
@@ -239,7 +251,8 @@ export default {
         .then(result => {
           if (result.status === 0) {
             this.leaveList.unshift(result.data)
-            this.$message('留言发表成功')
+            this.$message('发表成功')
+            this.content = ''
             console.log(result)
           } else {
             this.$message(result.message)
@@ -247,7 +260,7 @@ export default {
         })
         // eslint-disable-next-line handle-callback-err
         .catch(error => {
-          console.log('留言发表失败!')
+          console.log('发表失败!')
         })
     },
     leaveUpload () {

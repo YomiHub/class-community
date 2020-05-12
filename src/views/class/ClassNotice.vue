@@ -296,34 +296,40 @@ export default {
       return false // 阻止自动上传
     },
     uploadContent (filePath) {
-      noticeUpload({
-        user_id: this.$store.state.user.userId,
-        class_id: this.class_id,
-        title: this.form.title,
-        content: this.form.content,
-        notice_file: filePath,
-        add_time: new Date().toUTCString()
+      this.$refs.createform.validate(valid => {
+        if (valid) {
+          noticeUpload({
+            user_id: this.$store.state.user.userId,
+            class_id: this.class_id,
+            title: this.form.title,
+            content: this.form.content,
+            notice_file: filePath,
+            add_time: new Date().toUTCString()
+          })
+            .then(result => {
+              if (result.status === 0) {
+                this.$message('发布成功')
+                this.$refs.form.resetFields()
+                if (result.data.unread !== null) {
+                  this.alreadyRead =
+                  result.data.unread.split(' ').indexOf(result.data.user_name) > 0
+                }
+                this.recentContent = result.data
+                this.noticeList.unshift(result.data) // 历史公告
+                this.noticeTotal++
+                console.log(result)
+              } else {
+                this.$message(result.message)
+              }
+            })
+          // eslint-disable-next-line handle-callback-err
+            .catch(error => {
+              console.log('发布失败!')
+            })
+        } else {
+          this.$message('信息填写不完整')
+        }
       })
-        .then(result => {
-          if (result.status === 0) {
-            this.$message('公告发布成功')
-            this.$refs.form.resetFields()
-            if (result.data.unread !== null) {
-              this.alreadyRead =
-                result.data.unread.split(' ').indexOf(result.data.user_name) > 0
-            }
-            this.recentContent = result.data
-            this.noticeList.unshift(result.data) // 历史公告
-            this.noticeTotal++
-            console.log(result)
-          } else {
-            this.$message(result.message)
-          }
-        })
-        // eslint-disable-next-line handle-callback-err
-        .catch(error => {
-          console.log('公告发布失败!')
-        })
     },
     noticeUpload () {
       if (this.containFile) {

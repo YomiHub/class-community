@@ -147,10 +147,10 @@
                       :to="'/index/userpage/'+item.comment_user"
                       tag="div"
                     >
-                    <el-avatar
-                      :size="30"
-                      :src="item.avatar_url"
-                    ></el-avatar>
+                      <el-avatar
+                        :size="30"
+                        :src="item.avatar_url"
+                      ></el-avatar>
                     </router-link>
                   </el-col>
 
@@ -199,10 +199,10 @@
                                 :to="'/index/userpage/'+reply.reply_user"
                                 tag="div"
                               >
-                              <el-avatar
-                                :size="20"
-                                :src="reply.avatar_url"
-                              ></el-avatar>
+                                <el-avatar
+                                  :size="20"
+                                  :src="reply.avatar_url"
+                                ></el-avatar>
                               </router-link>
                             </el-col>
 
@@ -526,26 +526,30 @@ export default {
       })
     },
     addFocus (classId) {
-      addFocus({ class_id: classId, user_id: this.$store.state.user.userId }).then(result => {
-        if (result.status === 0) {
-          this.featureDetail.if_focus = 1
-        } else {
-          this.$message('网络请求出错')
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+      addFocus({ class_id: classId, user_id: this.$store.state.user.userId })
+        .then(result => {
+          if (result.status === 0) {
+            this.featureDetail.if_focus = 1
+          } else {
+            this.$message('网络请求出错')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     removeFocus (classId) {
-      removeFocus({ class_id: classId, user_id: this.$store.state.user.userId }).then(result => {
-        if (result.status === 0) {
-          this.featureDetail.if_focus = 0
-        } else {
-          this.$message('网络请求出错')
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+      removeFocus({ class_id: classId, user_id: this.$store.state.user.userId })
+        .then(result => {
+          if (result.status === 0) {
+            this.featureDetail.if_focus = 0
+          } else {
+            this.$message('网络请求出错')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     gotoClassPage (classId) {
       this.$router.push('/index/classpage/' + classId)
@@ -720,5 +724,13 @@ export default {
       }
     }
   }
+}
+</style>
+
+<style lang="scss">
+.content {
+      img {
+        max-width: 100%;
+      }
 }
 </style>

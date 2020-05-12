@@ -75,6 +75,13 @@ export default {
       }
     }
   },
+  created () {
+    if (this.$store.state.user.ifJoin) {
+      // 已经创建过班级
+      this.$message('已经加入过班级，不可再次加入')
+      this.$router.replace('/index')
+    }
+  },
   methods: {
     sendJoinInfo () {
       this.$refs.joinform.validate(valid => {

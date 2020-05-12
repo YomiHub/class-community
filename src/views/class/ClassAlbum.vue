@@ -46,7 +46,7 @@
       <el-col :span="18">
         <div class="grid-content">
           <div class="list-wrap">
-            <album-list :albumid="openId" :haspower="hasPower" :ifLazy="true"></album-list>
+            <album-list :albumid="openId" :hasalbum="albumArr.length!==0" :haspower="hasPower" :ifLazy="true"></album-list>
           </div>
         </div>
       </el-col>

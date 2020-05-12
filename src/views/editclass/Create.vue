@@ -116,6 +116,13 @@ export default {
       }
     }
   },
+  created () {
+    if (this.$store.state.user.ifCreate) {
+      // 已经创建过班级
+      this.$message('已经创建过班级，不可重复创建')
+      this.$router.replace('/index')
+    }
+  },
   methods: {
     beforeLogoUpload (file) {
       const isLt2M = file.size / 1024 / 1024 < 2

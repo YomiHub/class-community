@@ -33,7 +33,7 @@
           :span="6"
           tag="div"
           class="upload-img"
-          v-if="haspower">
+          v-if="haspower&&hasalbum">
         <el-upload
           list-type="picture-card"
           :action="photoDir"
@@ -122,7 +122,7 @@ export default {
       this.getPhotos(newId)
     }
   },
-  props: ['albumid', 'haspower', 'ifLazy']
+  props: ['albumid', 'haspower', 'ifLazy', 'hasalbum']
 }
 </script>
 

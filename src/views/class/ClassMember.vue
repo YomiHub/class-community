@@ -1,7 +1,7 @@
 <template>
   <div class="content-box">
     <header class="class-info">
-      <h1>信管1162班-通讯录</h1>
+      <h1>{{className}}-通讯录</h1>
 
       <el-button
         size="mini"

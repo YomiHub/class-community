@@ -7,8 +7,8 @@
             size="large"
             :src="classInfo.logo_url"
           ></el-avatar>
-
         </div>
+         <p class="minisize-p text-center">ID:{{classInfo.id}}</p>
         <p class="minisize-p text-center">{{classInfo.name}}</p>
         <div class="flex-center">
           <P class="class-brief border-radius">{{classInfo.brief}}</P>
