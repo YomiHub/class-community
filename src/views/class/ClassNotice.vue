@@ -8,7 +8,7 @@
       <el-col :span="16">
         <div class="edit-wrap">
           <el-form
-            ref="form"
+            ref="createform"
             :model="form"
             :rules="rules"
             label-width="64px"
@@ -309,7 +309,7 @@ export default {
             .then(result => {
               if (result.status === 0) {
                 this.$message('发布成功')
-                this.$refs.form.resetFields()
+                this.$refs.createform.resetFields()
                 if (result.data.unread !== null) {
                   this.alreadyRead =
                   result.data.unread.split(' ').indexOf(result.data.user_name) > 0

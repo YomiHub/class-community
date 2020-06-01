@@ -45,7 +45,12 @@
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:;">
+                  <a
+                    href="javascript:;"
+                    v-clipboard:success="shareFeature"
+                    v-clipboard:error="shareError"
+                    v-clipboard:copy="copyUrl"
+                  >
                     <svg-icon icon-class="share"></svg-icon>
                     <span>分享</span>
                   </a>
@@ -338,7 +343,8 @@ export default {
       supportIcon: 'un_support',
       pageForm: '',
       redirect: '',
-      ifFocus: false
+      ifFocus: false,
+      copyUrl: window.location.href
     }
   },
   created () {
@@ -550,6 +556,19 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    shareFeature () {
+      // 分享：将当前URL复制到粘贴板
+      this.$message({
+        message: '复制成功，赶紧去粘贴分享吧~',
+        type: 'success'
+      })
+    },
+    shareError () {
+      this.$message({
+        message: '复制失败，可手动复制页面URL',
+        type: 'error'
+      })
     },
     gotoClassPage (classId) {
       this.$router.push('/index/classpage/' + classId)

@@ -11,6 +11,10 @@ import SocketIO from 'socket.io-client' */
 
 import '@/icons' // 将SvgIcon.vue注册为<svg-icon>全局组件，并引入所有svg
 import '@/permission.js' // 限制路由跳转，未登录时跳转到登录页
+
+import VueClipboard from 'vue-clipboard2' // 复制到粘贴板
+VueClipboard.config.autoSetContainer = true
+Vue.use(VueClipboard)
 Vue.config.productionTip = false
 
 /* const options = {
