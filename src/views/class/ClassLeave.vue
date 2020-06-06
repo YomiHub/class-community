@@ -102,6 +102,7 @@
                 target="_blank"
                 v-if="item.leave_file!=null"
               >下载附件</a>
+              <!-- <a :href="'http://view.officeapps.live.com/op/view.aspx?src='+encodeURIComponent(item.leave_file)" target="_blank" v-if="item.leave_file!=null">预览</a>  -->
               <a
                 href="javascript:;"
                 v-if="item.user_id==$store.state.user.userId"

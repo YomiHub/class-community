@@ -277,7 +277,7 @@ export default {
           .then(res => {
             if (res.status === 0) {
               var filePath = res.data.url
-              this.$refs.form.validate(valid => {
+              this.$refs.createform.validate(valid => {
                 if (valid) {
                   this.uploadContent(filePath)
                 } else {
@@ -290,7 +290,7 @@ export default {
           })
         // eslint-disable-next-line handle-callback-err
           .catch(error => {
-            console.log('文件上传失败，请重新上传!')
+            console.log('文件上传失败，请重新上传!' + error)
           })
       }
       return false // 阻止自动上传
