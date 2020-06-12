@@ -96,7 +96,8 @@ const routes = [
 ]
 
 const createRouter = () => new Router({
-  mode: 'history',
+  mode: 'history', // reqiure service support
+  base: process.env.NODE_ENV === 'development' ? '/' : '/classcommunity/',
   routes
 })
 const router = createRouter()

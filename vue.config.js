@@ -8,7 +8,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  publicPath: '/', // 默认就是'/',应用是被部署在一个域名的根路径上
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/classcommunity/', // 本地默认就是'/',实际应用是被部署在一个域名的根路径上classcommunity
   outputDir: 'dist', // 默认为dist
   assetsDir: 'static', // 默认为''
   lintOnSave: process.env.NODE_ENV !== 'production', // 每次保存时 lint 代码

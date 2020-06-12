@@ -19,7 +19,7 @@ import { getToken } from '@/utils/authority.js'
 const OPTION = {
   // 得到的是接口基础路径和配置代理的路径
   // url = base url + request url
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.NODE_ENV === 'development' ? process.env.VUE_APP_BASE_API : process.env.VUE_APP_BASE_API_URL_REAL,
   // 超时时间
   timeout: 30000,
   // 请求头

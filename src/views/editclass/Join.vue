@@ -54,7 +54,7 @@
     </div>
   </div>
 </template>
-<script>
+<script> // 加入班级
 import { joinClass } from '@/api/organize.js'
 export default {
   data () {

@@ -12,7 +12,7 @@ import List from '@/components/List.vue'
 export default {
   data () {
     return {
-      search: this.keyword // 使用路由+/:keyword可以通过$route.params.keyword
+      search: this.keyword || this.$store.state.user.search_key // 使用路由+/:keyword可以通过$route.params.keyword
     }
   },
   components: {

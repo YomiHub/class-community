@@ -3,7 +3,7 @@
     <header>
       <div class="content-box">
         <a
-          href="/"
+          href="./index"
           class="logo"
         >
           <img
